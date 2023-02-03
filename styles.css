@@ -12,6 +12,27 @@
 	width: 100vw;
 }
 
+.row-1,
+.row-2,
+.row-3,
+.row-4,
+.row-5,
+.row-6 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 button {
 	margin: 5px;
+}
+
+button:hover {
+	background-color: darkgrey;
+}
+
+button.display {
+	text-align: right;
+	width: 125px;
+	background-color: black;
 }
