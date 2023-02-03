@@ -1,0 +1,16 @@
+* {
+	background-color: black;
+	color: white;
+}
+
+.btn-group {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	width: 100vw;
+}
+
+button {
+	margin: 5px;
+}
