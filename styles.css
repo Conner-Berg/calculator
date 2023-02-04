@@ -34,5 +34,6 @@ button:hover {
 button.display {
 	text-align: right;
 	width: 125px;
+	height: 25px;
 	background-color: black;
 }
