@@ -66,6 +66,59 @@ function operate() {
 	}
 }
 
+function numToDisplay(event) {
+	display.textContent += event.target.textContent;
+}
+
+function operatorToDisplay() {}
+
+function clearDisplay() {
+	display.textContent = "";
+}
+
+function totalDisplay() {}
+
+let display = document.querySelector(".display");
+
+const num0Btn = document.querySelector(".zero");
+num0Btn.addEventListener("click", numToDisplay);
+
+const num1Btn = document.querySelector(".one");
+num1Btn.addEventListener("click", numToDisplay);
+
+const num2Btn = document.querySelector(".two");
+num2Btn.addEventListener("click", numToDisplay);
+
+const num3Btn = document.querySelector(".three");
+num3Btn.addEventListener("click", numToDisplay);
+
+const num4Btn = document.querySelector(".four");
+num4Btn.addEventListener("click", numToDisplay);
+
+const num5Btn = document.querySelector(".five");
+num5Btn.addEventListener("click", numToDisplay);
+
+const num6Btn = document.querySelector(".six");
+num6Btn.addEventListener("click", numToDisplay);
+
+const num7Btn = document.querySelector(".seven");
+num7Btn.addEventListener("click", numToDisplay);
+
+const num8Btn = document.querySelector(".eight");
+num8Btn.addEventListener("click", numToDisplay);
+
+const num9Btn = document.querySelector(".nine");
+num9Btn.addEventListener("click", numToDisplay);
+
+/* const decimalBtn = document.querySelector(".decimal");
+decimalBtn.addEventListener("click");
+
+const equalsBtn = document.querySelector(".equals");
+equalsBtn.addEventListener("click"); */
+
+const clearBtn = document.querySelector(".clear");
+clearBtn.addEventListener("click", clearDisplay);
+
 const addBtn = document.querySelector(".add");
 addBtn.addEventListener("click", add);
 
