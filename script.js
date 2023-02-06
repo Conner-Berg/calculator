@@ -71,7 +71,6 @@ function operatorToDisplay(event) {
 			return (userBeingDifficult = false);
 		}
 		display.textContent += event.target.textContent;
-		// ^ fix logic if user tries to divide by zero by adding an operator
 	}
 }
 
@@ -103,44 +102,55 @@ function totalDisplay() {
 		num2 = Number(display.textContent.substring(operatorIndex + 1));
 		add();
 	}
-	while (total.length > 17) {
-		total = total.slice(0, -1);
+	total = String(total);
+	if (Number(total.length) > 16) {
+		roundTotal();
 	}
-	if (total.length === 17) {
-		let totalRounded = Math.round(total.slice(-2));
-		total = total.slice(0, -2);
-		total += totalRounded;
-		total += Number(total);
-	}
+	return (display.textContent = total);
 }
 
 function divide() {
-	total = num1 / num2;
+	return (total = num1 / num2);
 }
 
 function multiply() {
-	total = num1 * num2;
+	return (total = num1 * num2);
 }
 
 function subtract() {
-	total = num1 - num2;
+	return (total = num1 - num2);
 }
 
 function add() {
-	total = num1 + num2;
+	return (total = num1 + num2);
+}
+
+function roundTotal() {
+	total = String(total);
+	while (Number(total.length) > 17) {
+		total = String(total).slice(0, -1);
+	}
+	let totalRounded = total.slice(-2);
+	if (!totalRounded.includes(".")) {
+		totalRounded = Number(totalRounded) / 10;
+	}
+	totalRounded = Math.round(Number(totalRounded));
+	total = total.slice(0, -2);
+	total += String(totalRounded);
+	return (total = Number(total));
 }
 
 function clearDisplay() {
 	num1 = "";
 	num2 = "";
-	display.textContent = "";
+	return (display.textContent = "");
 }
 
 function backspaceDisplay() {
-	display.textContent = display.textContent.substring(
+	return (display.textContent = display.textContent.substring(
 		0,
 		display.textContent.length - 1
-	);
+	));
 }
 
 let num1;
