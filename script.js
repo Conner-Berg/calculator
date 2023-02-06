@@ -7,12 +7,44 @@ function numToDisplay(event) {
 
 function decimalToDisplay(event) {
 	if (display.textContent.length <= 16) {
-		if (display.textContent.includes(".") === false) {
-			// ^ Change to work with two floats
-			if (display.textContent === "") {
-				display.textContent += 0;
+		if (display.textContent.includes(".")) {
+			if (display.textContent.includes("÷")) {
+				if (
+					display.textContent.lastIndexOf(".") >
+						display.textContent.indexOf("÷") ===
+					false
+				) {
+					return (display.textContent += ".");
+				}
+			} else if (display.textContent.includes("x")) {
+				if (
+					display.textContent.lastIndexOf(".") >
+						display.textContent.indexOf("x") ===
+					false
+				) {
+					return (display.textContent += ".");
+				}
+			} else if (display.textContent.includes("-")) {
+				if (
+					display.textContent.lastIndexOf(".") >
+						display.textContent.indexOf("-") ===
+					false
+				) {
+					return (display.textContent += ".");
+				}
+			} else if (display.textContent.includes("+")) {
+				if (
+					display.textContent.lastIndexOf(".") >
+						display.textContent.indexOf("+") ===
+					false
+				) {
+					return (display.textContent += ".");
+				}
 			}
-			display.textContent += event.target.textContent;
+		} else if (display.textContent === "") {
+			display.textContent = "0.";
+		} else {
+			display.textContent += ".";
 		}
 	}
 }
@@ -36,6 +68,7 @@ function operatorToDisplay(event) {
 			totalDisplay();
 		}
 		display.textContent += event.target.textContent;
+		// ^ fix logic if user tries to divide by zero by adding an operator
 	}
 }
 
@@ -65,19 +98,22 @@ function totalDisplay() {
 }
 
 function divide() {
-	display.textContent = num1 / num2;
+	if (!num2 === 0) {
+		total = num1 / num2;
+	}
+	// ^ snarky error message if the user tries to divide by 0
 }
 
 function multiply() {
-	display.textContent = num1 * num2;
+	total = num1 * num2;
 }
 
 function subtract() {
-	display.textContent = num1 - num2;
+	total = num1 - num2;
 }
 
 function add() {
-	display.textContent = num1 + num2;
+	total = num1 + num2;
 }
 
 function clearDisplay() {
@@ -87,7 +123,6 @@ function clearDisplay() {
 }
 
 function backspaceDisplay() {
-	// Needs to reset num1/currentOperator/num2 if that's what backspace
 	display.textContent = display.textContent.substring(
 		0,
 		display.textContent.length - 1
@@ -96,6 +131,7 @@ function backspaceDisplay() {
 
 let num1;
 let num2;
+let total;
 
 let display = document.querySelector(".display");
 
