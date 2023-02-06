@@ -67,6 +67,9 @@ function operatorToDisplay(event) {
 		) {
 			totalDisplay();
 		}
+		if (userBeingDifficult) {
+			return (userBeingDifficult = false);
+		}
 		display.textContent += event.target.textContent;
 		// ^ fix logic if user tries to divide by zero by adding an operator
 	}
@@ -77,7 +80,12 @@ function totalDisplay() {
 		let operatorIndex = display.textContent.indexOf("÷");
 		num1 = Number(display.textContent.substring(0, operatorIndex));
 		num2 = Number(display.textContent.substring(operatorIndex + 1));
-		divide();
+		if (num2 === 0) {
+			userBeingDifficult = true;
+			return alert("You know that doesn't work, right?");
+		} else {
+			divide();
+		}
 	} else if (display.textContent.includes("x")) {
 		let operatorIndex = display.textContent.indexOf("x");
 		num1 = Number(display.textContent.substring(0, operatorIndex));
@@ -95,13 +103,19 @@ function totalDisplay() {
 		num2 = Number(display.textContent.substring(operatorIndex + 1));
 		add();
 	}
+	while (total.length > 17) {
+		total = total.slice(0, -1);
+	}
+	if (total.length === 17) {
+		let totalRounded = Math.round(total.slice(-2));
+		total = total.slice(0, -2);
+		total += totalRounded;
+		total += Number(total);
+	}
 }
 
 function divide() {
-	if (!num2 === 0) {
-		total = num1 / num2;
-	}
-	// ^ snarky error message if the user tries to divide by 0
+	total = num1 / num2;
 }
 
 function multiply() {
@@ -132,6 +146,8 @@ function backspaceDisplay() {
 let num1;
 let num2;
 let total;
+
+let userBeingDifficult = false;
 
 let display = document.querySelector(".display");
 
