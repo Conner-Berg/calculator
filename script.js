@@ -1,82 +1,101 @@
-function add() {
-	let a = Number(prompt("Addition!\nFirst number: "));
-	let b = Number(prompt("Addition!\nSecond number: "));
-	let result = a + b;
-	console.log(`The addition result is ${result}`);
-	return alert(`The addition result is ${result}`);
-}
-
-function subtract() {
-	let a = Number(prompt("Subtraction!\nFirst number: "));
-	let b = Number(prompt("Subtraction!\nSecond number: "));
-	let result = a - b;
-	console.log(`The subtraction result is ${result}`);
-	return alert(`The subtraction result is ${result}`);
-}
-
-function multiply() {
-	let a = Number(prompt("Multiplication!\nFirst number: "));
-	let b = Number(prompt("Multiplication!\nSecond number: "));
-	let result = a * b;
-	console.log(`The multiplication result is ${result}`);
-	return alert(`The multiplication result is ${result}`);
-}
-
-function divide() {
-	let a = Number(prompt("Division!\nFirst number: "));
-	let b = Number(prompt("Division!\nSecond number: "));
-	let result = a / b;
-	console.log(`The division result is ${result}`);
-	return alert(`The division result is ${result}`);
-}
-
-function operate() {
-	let operator = prompt("Operator: ");
-	if (
-		operator.toLowerCase() === "add" ||
-		operator.toLowerCase() === "addition" ||
-		operator === "+"
-	) {
-		add();
-	} else if (
-		operator.toLowerCase() === "subtract" ||
-		operator.toLowerCase() === "subtraction" ||
-		operator === "-"
-	) {
-		subtract();
-	} else if (
-		operator.toLowerCase() === "multiply" ||
-		operator.toLowerCase() === "multiplication" ||
-		operator.toLowerCase() === "x" ||
-		operator === "*"
-	) {
-		multiply();
-	} else if (
-		operator.toLowerCase() === "divide" ||
-		operator.toLowerCase() === "division" ||
-		operator === "/" ||
-		operator === "÷"
-	) {
-		divide();
-	} else {
-		alert(
-			"Only addition, subtraction, multiplication, and subtraction are supported.\nPlease try again."
-		);
-		operate();
+function numToDisplay(event) {
+	// ^ Add catch for trailing zeros
+	if (display.textContent.length < 16) {
+		display.textContent += event.target.textContent;
 	}
 }
 
-function numToDisplay(event) {
-	display.textContent += event.target.textContent;
+function decimalToDisplay(event) {
+	if (display.textContent.length <= 16) {
+		if (display.textContent.includes(".") === false) {
+			// ^ Change to work with two floats
+			if (display.textContent === "") {
+				display.textContent += 0;
+			}
+			display.textContent += event.target.textContent;
+		}
+	}
 }
 
-function operatorToDisplay() {}
+function operatorToDisplay(event) {
+	if (display.textContent.length < 16) {
+		if (
+			display.textContent.endsWith("÷") ||
+			display.textContent.endsWith("x") ||
+			display.textContent.endsWith("-") ||
+			display.textContent.endsWith("+")
+		) {
+			return;
+		} else if (
+			display.textContent.includes("÷") ||
+			display.textContent.includes("x") ||
+			display.textContent.includes("-") ||
+			// ^ Needs to account for negative nums
+			display.textContent.includes("+")
+		) {
+			totalDisplay();
+		}
+		display.textContent += event.target.textContent;
+	}
+}
+
+function totalDisplay() {
+	if (display.textContent.includes("÷")) {
+		let operatorIndex = display.textContent.indexOf("÷");
+		num1 = Number(display.textContent.substring(0, operatorIndex));
+		num2 = Number(display.textContent.substring(operatorIndex + 1));
+		divide();
+	} else if (display.textContent.includes("x")) {
+		let operatorIndex = display.textContent.indexOf("x");
+		num1 = Number(display.textContent.substring(0, operatorIndex));
+		num2 = Number(display.textContent.substring(operatorIndex + 1));
+		multiply();
+	} else if (display.textContent.includes("-")) {
+		// Need to account for multiple - when there's a negative num
+		let operatorIndex = display.textContent.indexOf("-");
+		num1 = Number(display.textContent.substring(0, operatorIndex));
+		num2 = Number(display.textContent.substring(operatorIndex + 1));
+		subtract();
+	} else if (display.textContent.includes("+")) {
+		let operatorIndex = display.textContent.indexOf("+");
+		num1 = Number(display.textContent.substring(0, operatorIndex));
+		num2 = Number(display.textContent.substring(operatorIndex + 1));
+		add();
+	}
+}
+
+function divide() {
+	display.textContent = num1 / num2;
+}
+
+function multiply() {
+	display.textContent = num1 * num2;
+}
+
+function subtract() {
+	display.textContent = num1 - num2;
+}
+
+function add() {
+	display.textContent = num1 + num2;
+}
 
 function clearDisplay() {
+	num1 = "";
+	num2 = "";
 	display.textContent = "";
 }
 
-function totalDisplay() {}
+function backspaceDisplay() {
+	// Needs to reset num1/currentOperator/num2 if that's what backspace
+	display.textContent = display.textContent.substring(
+		0,
+		display.textContent.length - 1
+	);
+}
+
+let num1;
+let num2;
 
 let display = document.querySelector(".display");
 
@@ -110,26 +129,26 @@ num8Btn.addEventListener("click", numToDisplay);
 const num9Btn = document.querySelector(".nine");
 num9Btn.addEventListener("click", numToDisplay);
 
-/* const decimalBtn = document.querySelector(".decimal");
-decimalBtn.addEventListener("click");
+const decimalBtn = document.querySelector(".decimal");
+decimalBtn.addEventListener("click", decimalToDisplay);
 
-const equalsBtn = document.querySelector(".equals");
-equalsBtn.addEventListener("click"); */
+const addBtn = document.querySelector(".add");
+addBtn.addEventListener("click", operatorToDisplay);
+
+const subtractBtn = document.querySelector(".subtract");
+subtractBtn.addEventListener("click", operatorToDisplay);
+
+const multiplyBtn = document.querySelector(".multiply");
+multiplyBtn.addEventListener("click", operatorToDisplay);
+
+const divideBtn = document.querySelector(".divide");
+divideBtn.addEventListener("click", operatorToDisplay);
 
 const clearBtn = document.querySelector(".clear");
 clearBtn.addEventListener("click", clearDisplay);
 
-const addBtn = document.querySelector(".add");
-addBtn.addEventListener("click", add);
+const backspaceBtn = document.querySelector(".backspace");
+backspaceBtn.addEventListener("click", backspaceDisplay);
 
-const subtractBtn = document.querySelector(".subtract");
-subtractBtn.addEventListener("click", subtract);
-
-const multiplyBtn = document.querySelector(".multiply");
-multiplyBtn.addEventListener("click", multiply);
-
-const divideBtn = document.querySelector(".divide");
-divideBtn.addEventListener("click", divide);
-
-const operateBtn = document.querySelector(".operate-btn");
-operateBtn.addEventListener("click", operate);
+const equalsBtn = document.querySelector(".equals");
+equalsBtn.addEventListener("click", totalDisplay);
