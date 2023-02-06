@@ -12,28 +12,53 @@
 	width: 100vw;
 }
 
-.row-1,
-.row-2,
-.row-3,
-.row-4,
-.row-5,
-.row-6 {
+.rows {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: 100vw;
 }
 
 button {
+	width: 25px;
+	height: 25px;
 	margin: 5px;
 }
 
-button:hover {
+.num:hover {
 	background-color: darkgrey;
+}
+
+.operator:hover {
+	background-color: darkgreen;
+}
+
+.mod-display button:hover {
+	background-color: darkred;
 }
 
 button.display {
 	text-align: right;
-	width: 125px;
+	width: 130px;
 	height: 25px;
-	background-color: black;
+	padding: 0 5px;
 }
+
+.clear,
+.backspace {
+	width: 60px;
+	font-size: 10px;
+	padding: 0px;
+	text-align: center;
+}
+
+/* .current-operator {
+	width: 25px;
+	height: 25px;
+}
+
+.history {
+	text-align: right;
+	width: 90px;
+	height: 25px;
+} */
