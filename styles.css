@@ -16,7 +16,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 100vw;
+	width: 50vw;
 }
 
 button {
@@ -51,14 +51,3 @@ button.display {
 	padding: 0px;
 	text-align: center;
 }
-
-/* .current-operator {
-	width: 25px;
-	height: 25px;
-}
-
-.history {
-	text-align: right;
-	width: 90px;
-	height: 25px;
-} */
