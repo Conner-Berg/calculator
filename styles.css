@@ -8,7 +8,7 @@
 }
 
 body {
-	background: no-repeat center url(images/space.jpg);
+	background: no-repeat center url("images/space.jpg");
 	background-size: cover;
 	-webkit-text-stroke: 2px black;
 }
