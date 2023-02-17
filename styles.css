@@ -1,6 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 * {
-	background-color: black;
 	color: white;
+	font-family: "Roboto", sans-serif;
+	font-size: 36px;
+	font-weight: bold;
+}
+
+body {
+	background: no-repeat center url(/images/space.jpg);
+	background-size: cover;
+	-webkit-text-stroke: 2px black;
 }
 
 .btn-group {
@@ -16,38 +26,45 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 50vw;
 }
 
-button {
-	width: 25px;
-	height: 25px;
-	margin: 5px;
+.num,
+.operator {
+	width: 100px;
+	height: 100px;
 }
 
 .num:hover {
-	background-color: darkgrey;
+	background-color: rgba(0, 0, 0, 0.6);
 }
 
 .operator:hover {
-	background-color: darkgreen;
+	background-color: rgba(21, 255, 0, 0.4);
 }
 
 .mod-display button:hover {
-	background-color: darkred;
+	background-color: rgba(100, 0, 0, 0.5);
 }
 
 button.display {
 	text-align: right;
-	width: 130px;
-	height: 25px;
-	padding: 0 5px;
+	width: 460px;
+	height: 100px;
+	padding-right: 12px;
+	font-size: 48px;
 }
 
 .clear,
 .backspace {
-	width: 60px;
-	font-size: 10px;
+	width: 220px;
+	height: 100px;
 	padding: 0px;
 	text-align: center;
+}
+
+button {
+	margin: 10px;
+	border-radius: 5px;
+	border: 3px solid black;
+	background-color: rgba(0, 0, 0, 0.3);
 }
